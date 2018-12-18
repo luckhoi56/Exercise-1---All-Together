@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import addUser from './addUser';
+import userList from './userList';
 /*
 This exercise will help you put together and practice all of the concepts you've
 learned thus far. It will also help you form a strong foundational knowledge of
@@ -11,6 +12,15 @@ The instructions for this project are located in the `instructions.md` file.
 */
 
 class App extends Component {
+  state = {
+    users:[],
+  }
+  onAddUser=(user)=>{
+    user.noGamePlayed=0;
+    this.setState(currState=>({
+      users:[...currState.users,user],
+    })) //to concat from currState
+  }
   render() {
     return (
       <div className="App">
@@ -18,6 +28,11 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
+        <addUser
+        users = {this.state.users}
+        onAddUser = {this.onAddUser}
+        />
+        <userList users = {this.state.users}/>
       </div>
     );
   }
